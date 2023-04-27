@@ -16,7 +16,8 @@ map.on('load', function () {
     // import our election data that we converted to wgs84 in QGIS
     map.addSource('election-county', {
         type: 'geojson',
-        data: './data/county_level_presidential_results.geojson'
+        data: './data/county_level_presidential_results.geojson',
+        generateId: true
     })
 
     map.addLayer({
@@ -31,7 +32,8 @@ map.on('load', function () {
                 ['<=', ['get', 'Final_2004_D_votepct'], 0.60], '#78aaff', // medium blue
                 ['<=', ['get', 'Final_2004_D_votepct'], 0.80], '#649eff', // dark blue
                 '#4188ff' // darkest blue
-            ]
+            ],
+            'fill-opacity': 0.7
         }
     });
 
@@ -103,5 +105,42 @@ map.on('load', function () {
             // update the map with the data for the selected year
             updateMap(year)
         })
+
+        let hoveredCountyId = null
+
+        // update featurestate when the mouse moves around within the county layer
+        map.on('mousemove', 'fill-election-county', (e) => {
+            if (e.features.length > 0) {
+                if (hoveredCountyId !== null) {
+                    map.setFeatureState(
+                        { source: 'election-county', id: hoveredCountyId },
+                        { hover: false }
+                    );
+                }
+                hoveredCountyId = e.features[0].id;
+                map.setFeatureState(
+                    { source: 'election-county', id: hoveredCountyId },
+                    { hover: true }
+                );
+                map.setPaintProperty('fill-election-county', 'fill-opacity', [
+                    'case',
+                    ['==', ['id'], hoveredCountyId],
+                    1,
+                    0.5
+                ]);
+            }
+        });
+        
+
+        // when the mouse leaves the cd layer, make sure nothing has the hover featurestate
+        map.on('mouseleave', 'fill-election-county', () => {
+            if (hoveredCountyId !== null) {
+                map.setFeatureState(
+                    { source: 'election-county', id: hoveredCountyId },
+                    { hover: false }
+                );
+            }
+            hoveredCountyId = null;
+        });
     })
 })
