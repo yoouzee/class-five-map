@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>U.S. Presidential Election Results by County (2004-2020)</title>
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.14.0/mapbox-gl.css" rel="stylesheet">
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.14.0/mapbox-gl.js"></script>
+    <link href="css/styles.css" rel="stylesheet">
+
+</head>
+
+<body>
+    <div id="main-container">
+        <nav>
+            <div class="title">U.S. Presidential Election Results by County (2004-2020)</div>
+            <div class="nav-links">
+                <a class="nav-link" href="https://github.com/yoouzee/class-five-map" target="_blank"
+                    rel="noopener noreferrer">Github</a>
+            </div>
+
+        </nav>
+        <div id="content-container">
+            <div id="sidebar">
+
+                <p>This is a simple, responsive map that displays the democratic vote share by county for the five U.S.
+                    Presidential Elections between 2004 and 2020.</p>
+                <p>Select a year below to see the democratic vote share for each county in the United States for that
+                    election year.</p>
+                <p>You can also click on the map to see which county it is.</p>
+
+                <h3>Select Year</h3>
+                <div class="year-buttons">
+                    <button id="year-2004" class="year-button">2004</button>
+                    <button id="year-2008" class="year-button">2008</button>
+                    <button id="year-2012" class="year-button">2012</button>
+                    <button id="year-2016" class="year-button">2016</button>
+                    <button id="year-2020" class="year-button">2020</button>
+                </div>
+
+                <p style="font-size: smaller;">Data for this map was taken from the <a
+                        href="https://electionlab.mit.edu">MIT Election Data Lab</a>.</p>
+
+
+            </div>
+            <div id="map"></div>
+            <div id="legend">
+                <h4>Legend</h4>
+                <div class="legend-item">
+                    <span class="legend-color" style="background-color: #accbff;"></span>
+                    <span class="legend-label">0% - 20%</span>
+                </div>
+                <div class="legend-item">
+                    <span class="legend-color" style="background-color: #92bbff;"></span>
+                    <span class="legend-label">20% - 40%</span>
+                </div>
+                <div class="legend-item">
+                    <span class="legend-color" style="background-color: #78aaff;"></span>
+                    <span class="legend-label">40% - 60%</span>
+                </div>
+                <div class="legend-item">
+                    <span class="legend-color" style="background-color: #649eff;"></span>
+                    <span class="legend-label">60% - 80%</span>
+                </div>
+                <div class="legend-item">
+                    <span class="legend-color" style="background-color: #4188ff;"></span>
+                    <span class="legend-label">80% - 100%</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"
+        integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
+    <script src="js/scripts.js"></script>
+
+</body>
+
+</html>
